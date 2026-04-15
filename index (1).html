@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tanuj Pharmacy – Avadi, Tamil Nadu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage:       #4a7c59;
+      --sage-light: #7aab89;
+      --sage-dark:  #2e5438;
+      --cream:      #f7f3ec;
+      --warm-white: #fdfaf5;
+      --charcoal:   #1c2b22;
+      --gold:       #c9a84c;
+      --gold-light: #e8d5a3;
+      --muted:      #7a8a7e;
+      --border:     #dde8e1;
+      --shadow:     0 8px 40px rgba(44,84,56,.10);
+      --shadow-lg:  0 24px 80px rgba(44,84,56,.18);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--sage-light); color: #fff; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 3px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 5vw;
+      background: rgba(253,250,245,.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(44,84,56,.08); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 600; letter-spacing: .02em;
+      color: var(--sage-dark); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo .cross { font-size: 1.1rem; color: var(--gold); }
+    .nav-links { display: flex; gap: 34px; list-style: none; }
+    .nav-links a {
+      font-size: .88rem; font-weight: 400; letter-spacing: .06em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--muted); transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--sage);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--sage-dark); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--sage); color: #fff !important;
+      padding: 9px 22px; border-radius: 40px;
+      font-weight: 500 !important;
+      transition: background .25s, transform .2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--sage-dark) !important; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5vw 80px;
+      gap: 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, #e8f3ec 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 50% at 10% 80%, #f0ede5 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--cream); border: 1px solid var(--border);
+      padding: 6px 16px; border-radius: 40px;
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--sage); font-weight: 500; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp .7s .2s forwards;
+    }
+    .hero-badge .dot { width: 7px; height: 7px; background: var(--sage); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 500; line-height: 1.12;
+      color: var(--charcoal); margin-bottom: 20px;
+      opacity: 0; animation: fadeUp .8s .35s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--sage); }
+    .hero-title .line2 { display: block; }
+
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+      color: var(--muted); max-width: 440px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp .8s .5s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .8s .65s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--sage-dark); color: #fff;
+      padding: 14px 30px; border-radius: 50px;
+      font-size: .9rem; font-weight: 500; letter-spacing: .03em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 6px 24px rgba(46,84,56,.3);
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(46,84,56,.35); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--charcoal);
+      padding: 14px 30px; border-radius: 50px;
+      font-size: .9rem; font-weight: 500; letter-spacing: .03em;
+      text-decoration: none; border: 1.5px solid var(--border); cursor: pointer;
+      transition: border-color .25s, color .25s, transform .2s;
+    }
+    .btn-secondary:hover { border-color: var(--sage); color: var(--sage); transform: translateY(-2px); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+      opacity: 0; animation: fadeLeft .9s .4s forwards;
+    }
+    .hero-card-main {
+      width: 340px; height: 420px;
+      background: linear-gradient(145deg, var(--sage-dark) 0%, #3a6647 60%, #4a7c59 100%);
+      border-radius: 28px; position: relative; overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+    }
+    .hero-card-main::before {
+      content: ''; position: absolute;
+      width: 260px; height: 260px;
+      background: rgba(255,255,255,.06); border-radius: 50%;
+      top: -80px; right: -80px;
+    }
+    .hero-card-main::after {
+      content: ''; position: absolute;
+      width: 180px; height: 180px;
+      background: rgba(201,168,76,.15); border-radius: 50%;
+      bottom: -40px; left: -40px;
+    }
+    .hero-pharmacy-icon {
+      font-size: 5rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,.2));
+      animation: float 4s ease-in-out infinite;
+      position: relative; z-index: 2;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .hero-card-text {
+      color: #fff; text-align: center; position: relative; z-index: 2;
+    }
+    .hero-card-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500; letter-spacing: .02em;
+    }
+    .hero-card-text p { font-size: .82rem; opacity: .7; margin-top: 4px; letter-spacing: .06em; text-transform: uppercase; }
+    .hero-rating-badge {
+      position: absolute; top: -18px; right: -22px;
+      background: #fff; border-radius: 18px; padding: 12px 18px;
+      display: flex; align-items: center; gap: 7px;
+      box-shadow: 0 8px 30px rgba(44,84,56,.18);
+      animation: floatSlow 5s ease-in-out infinite 1s;
+    }
+    @keyframes floatSlow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-rating-badge .stars { color: #f5a623; font-size: .95rem; }
+    .hero-rating-badge .score { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.1rem; color: var(--charcoal); }
+    .hero-rating-badge .label { font-size: .72rem; color: var(--muted); letter-spacing: .04em; }
+    .hero-pill {
+      position: absolute; bottom: -14px; left: -30px;
+      background: var(--gold); border-radius: 40px;
+      padding: 10px 20px; color: #fff;
+      font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+      box-shadow: 0 6px 24px rgba(201,168,76,.4);
+      animation: floatSlow 5s ease-in-out infinite .5s;
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 20px 5vw;
+      display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: .85rem; color: var(--muted); font-weight: 400;
+      opacity: 0;
+    }
+    .trust-item .icon { font-size: 1.3rem; }
+    .trust-item strong { color: var(--charcoal); font-weight: 500; }
+
+    /* ─── SECTIONS common ─── */
+    section { padding: 100px 5vw; }
+    .section-tag {
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--sage); font-weight: 500; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-tag::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--sage); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500; line-height: 1.2;
+      color: var(--charcoal); margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--sage); }
+    .section-sub {
+      font-size: 1rem; font-weight: 300; color: var(--muted);
+      line-height: 1.7; max-width: 520px;
+    }
+
+    /* ─── SERVICES ─── */
+    .services { background: var(--warm-white); }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .section-tag { justify-content: center; }
+    .services-header .section-tag::before { display: none; }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 30px;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      cursor: default; position: relative; overflow: hidden;
+      opacity: 0;
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+      opacity: 0; transition: opacity .35s;
+      border-radius: 20px;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover .service-icon,
+    .service-card:hover .service-title,
+    .service-card:hover .service-desc { color: #fff; }
+    .service-icon {
+      font-size: 2.2rem; margin-bottom: 18px;
+      display: block; position: relative; z-index: 1;
+      transition: color .3s;
+    }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--charcoal); margin-bottom: 10px;
+      position: relative; z-index: 1; transition: color .3s;
+    }
+    .service-desc {
+      font-size: .88rem; color: var(--muted); line-height: 1.65;
+      position: relative; z-index: 1; transition: color .3s;
+    }
+
+    /* ─── WHY US ─── */
+    .why {
+      background: var(--cream);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .why-visual { position: relative; }
+    .why-img-block {
+      width: 100%; aspect-ratio: 4/5;
+      background: linear-gradient(160deg, var(--sage) 0%, var(--sage-dark) 100%);
+      border-radius: 24px 24px 80px 24px; overflow: hidden;
+      position: relative; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-img-block .big-icon {
+      font-size: 9rem; opacity: .15; position: absolute;
+      bottom: -10px; right: -10px;
+    }
+    .why-img-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      color: rgba(255,255,255,.9); z-index: 2;
+    }
+    .why-img-inner .main-icon { font-size: 6rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,.2)); animation: float 4s ease-in-out infinite; }
+    .why-img-inner p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; letter-spacing: .04em; }
+    .why-stat-card {
+      position: absolute; right: -32px; top: 50%;
+      transform: translateY(-50%);
+      background: #fff; border-radius: 18px;
+      padding: 22px 26px; box-shadow: var(--shadow-lg);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .why-stat { display: flex; align-items: center; gap: 12px; }
+    .why-stat .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 600; color: var(--sage-dark);
+    }
+    .why-stat .label { font-size: .78rem; color: var(--muted); letter-spacing: .04em; line-height: 1.4; }
+    .why-features { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
+    .why-feature {
+      display: flex; gap: 18px; align-items: flex-start;
+      opacity: 0;
+    }
+    .why-feature .icon-wrap {
+      width: 44px; height: 44px; min-width: 44px;
+      background: var(--sage-dark); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #fff; box-shadow: 0 4px 16px rgba(46,84,56,.28);
+    }
+    .why-feature h4 { font-size: .95rem; font-weight: 500; color: var(--charcoal); margin-bottom: 4px; }
+    .why-feature p { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── PRODUCTS ─── */
+    .products { background: var(--warm-white); }
+    .products-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 18px;
+      overflow: hidden; transition: transform .3s, box-shadow .3s;
+      opacity: 0;
+    }
+    .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .product-img {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .product-body { padding: 18px 20px 22px; }
+    .product-cat {
+      font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 6px; font-weight: 500;
+    }
+    .product-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--charcoal); margin-bottom: 6px; }
+    .product-desc { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background: var(--sage-dark); color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .testimonials::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 30%, rgba(201,168,76,.12) 0%, transparent 60%);
+    }
+    .testimonials .section-tag { color: var(--gold-light); }
+    .testimonials .section-tag::before { background: var(--gold-light); }
+    .testimonials .section-title { color: #fff; }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .testi-card {
+      background: rgba(255,255,255,.07); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 32px 28px;
+      transition: transform .3s, background .3s;
+      opacity: 0;
+    }
+    .testi-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.12); }
+    .testi-stars { color: var(--gold); font-size: .95rem; margin-bottom: 16px; letter-spacing: 2px; }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.12rem; font-style: italic; line-height: 1.7;
+      color: rgba(255,255,255,.88); margin-bottom: 22px;
+    }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--sage); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; border: 2px solid rgba(255,255,255,.2);
+    }
+    .testi-name { font-size: .9rem; font-weight: 500; }
+    .testi-sub { font-size: .78rem; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+    /* ─── CONTACT / INFO ─── */
+    .contact {
+      background: var(--cream);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .info-blocks { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+    .info-block {
+      display: flex; gap: 18px; align-items: flex-start;
+      opacity: 0;
+    }
+    .info-block .icon-wrap {
+      width: 48px; height: 48px; min-width: 48px;
+      background: #fff; border-radius: 16px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; box-shadow: 0 4px 16px rgba(44,84,56,.06);
+    }
+    .info-block h4 { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sage); margin-bottom: 5px; font-weight: 500; }
+    .info-block p { font-size: .92rem; color: var(--charcoal); line-height: 1.6; }
+    .info-block a { color: var(--sage-dark); text-decoration: none; font-weight: 500; }
+    .info-block a:hover { text-decoration: underline; }
+
+    /* Contact form */
+    .contact-form { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group label { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select {
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif; font-size: .92rem; color: var(--charcoal);
+      outline: none; transition: border-color .25s, box-shadow .25s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--sage); box-shadow: 0 0 0 3px rgba(74,124,89,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit {
+      background: var(--sage-dark); color: #fff;
+      border: none; border-radius: 50px; padding: 15px 36px;
+      font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 500; letter-spacing: .04em;
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      width: fit-content; transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 6px 24px rgba(46,84,56,.28);
+    }
+    .form-submit:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(46,84,56,.32); }
+    .form-success {
+      display: none; background: var(--sage); color: #fff;
+      padding: 16px 24px; border-radius: 14px; font-size: .92rem;
+      align-items: center; gap: 10px;
+    }
+
+    /* ─── MAP PLACEHOLDER ─── */
+    .map-section { background: #fff; padding: 0; }
+    .map-container {
+      width: 100%; height: 380px;
+      background: linear-gradient(135deg, #e8f3ec 0%, #d5e8dc 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .map-container::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(74,124,89,.08) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(74,124,89,.08) 40px);
+    }
+    .map-pin-card {
+      background: #fff; border-radius: 22px;
+      padding: 28px 36px; box-shadow: var(--shadow-lg);
+      text-align: center; position: relative; z-index: 2;
+      max-width: 380px;
+    }
+    .map-pin { font-size: 2.8rem; margin-bottom: 12px; animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .map-pin-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--charcoal); margin-bottom: 6px; }
+    .map-pin-card p { font-size: .84rem; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+    .map-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--sage-dark); color: #fff;
+      padding: 11px 24px; border-radius: 40px;
+      font-size: .84rem; font-weight: 500; text-decoration: none;
+      transition: background .25s;
+    }
+    .map-btn:hover { background: var(--sage); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--charcoal); color: rgba(255,255,255,.7);
+      padding: 60px 5vw 30px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 48px;
+    }
+    .footer-brand .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; color: #fff; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .footer-brand p { font-size: .86rem; line-height: 1.7; max-width: 260px; }
+    .footer-col h4 { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; margin-bottom: 16px; font-weight: 500; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: .85rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--sage-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
+
+    /* ─── FLOATING CALL BUTTON ─── */
+    .float-call {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      background: var(--sage-dark); color: #fff;
+      width: 58px; height: 58px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; text-decoration: none;
+      box-shadow: 0 8px 28px rgba(46,84,56,.4);
+      transition: transform .25s, background .25s;
+      animation: scaleIn .6s 1s both;
+    }
+    .float-call:hover { transform: scale(1.1); background: var(--sage); }
+    @keyframes scaleIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .float-call::before {
+      content: ''; position: absolute;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--sage-dark); opacity: .5;
+      animation: ripple 2.5s ease-out infinite;
+    }
+    @keyframes ripple { 0%{transform:scale(1);opacity:.5} 100%{transform:scale(2.4);opacity:0} }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeLeft { from{opacity:0;transform:translateX(40px)} to{opacity:1;transform:translateX(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .hero-visual { display: none; }
+      .why, .contact { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media(max-width:600px) {
+      .trust-bar { gap: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ─── HOUR BADGE ─── */
+    .hours-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px; margin-top: 36px;
+    }
+    .hours-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px 22px;
+      opacity: 0;
+    }
+    .hours-card .day { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 6px; }
+    .hours-card .time { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--charcoal); }
+    .hours-card.today { border-color: var(--sage); background: #f0f9f4; }
+    .hours-card.today .day::after { content: ' · Today'; color: var(--gold); }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #eaf7ee; border: 1px solid #b8e0c4; border-radius: 40px;
+      padding: 5px 14px; font-size: .78rem; color: #2a7d46; font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .open-badge .dot { width: 7px; height: 7px; background: #38a96d; border-radius: 50%; animation: pulse 2s infinite; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="cross">✚</span> Tanuj Pharmacy
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="tel:09600040093" class="nav-cta">📞 Call Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Trusted Pharmacy · Avadi, Tamil Nadu</div>
+    <h1 class="hero-title">
+      Your Health,<br>
+      <em>Our Care</em><br>
+      <span class="line2">Every Step.</span>
+    </h1>
+    <p class="hero-sub">
+      Tanuj Pharmacy brings compassionate care and quality medicines to the heart of Avadi. Serving the community of Kamaraj Nagar with dedication since day one.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:09600040093" class="btn-primary">📞 &nbsp;Call Us Now</a>
+      <a href="#services" class="btn-secondary">Our Services →</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-rating-badge">
+      <span class="stars">★★★★★</span>
+      <span class="score">5.0</span>
+      <span class="label">Google Reviews</span>
+    </div>
+    <div class="hero-card-main">
+      <div class="hero-pharmacy-icon">💊</div>
+      <div class="hero-card-text">
+        <h3>Tanuj Pharmacy</h3>
+        <p>Avadi · Tamil Nadu</p>
+      </div>
+    </div>
+    <div class="hero-pill">✓ Quality Medicines</div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <span class="icon">⭐</span>
+    <div><strong>5.0</strong> Google Rating</div>
+  </div>
+  <div class="trust-item">
+    <span class="icon">📍</span>
+    <div><strong>Kamaraj Nagar,</strong> Avadi</div>
+  </div>
+  <div class="trust-item">
+    <span class="icon">📞</span>
+    <div><strong>096000 40093</strong></div>
+  </div>
+  <div class="trust-item">
+    <span class="icon">🏥</span>
+    <div><strong>Licensed</strong> Pharmacy</div>
+  </div>
+  <div class="trust-item">
+    <span class="icon">🤝</span>
+    <div><strong>Expert</strong> Guidance</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Our <em>Services</em></h2>
+    <p class="section-sub">From everyday medicines to specialised healthcare products, we've got everything you need — with expert advice at every step.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">💊</span>
+      <div class="service-title">Prescription Medicines</div>
+      <p class="service-desc">A comprehensive range of prescription drugs, dispensed accurately by our trained pharmacists with safety as the top priority.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🌿</span>
+      <div class="service-title">Ayurvedic & Herbal</div>
+      <p class="service-desc">A curated selection of Ayurvedic remedies and herbal supplements, honouring traditional wellness wisdom.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">👶</span>
+      <div class="service-title">Baby & Child Care</div>
+      <p class="service-desc">Trusted baby care products, infant nutrition, and child health essentials sourced from reputed brands.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💉</span>
+      <div class="service-title">Surgical Supplies</div>
+      <p class="service-desc">Bandages, dressings, syringes, and first-aid materials for home and clinical use — always in stock.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧴</span>
+      <div class="service-title">Skincare & Cosmetics</div>
+      <p class="service-desc">Dermatologist-recommended skincare, sunscreens, and personal care products for the whole family.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🩺</span>
+      <div class="service-title">Health Consultation</div>
+      <p class="service-desc">Not sure which medicine suits you? Our pharmacist offers free guidance on OTC products and health concerns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="about">
+  <div class="why-visual reveal">
+    <div class="why-img-block">
+      <span class="big-icon">🏥</span>
+      <div class="why-img-inner">
+        <span class="main-icon">⚕️</span>
+        <p>Est. in Avadi</p>
+      </div>
+    </div>
+    <div class="why-stat-card">
+      <div class="why-stat">
+        <span class="num">5★</span>
+        <span class="label">Google<br>Verified Rating</span>
+      </div>
+      <div style="width:100%;height:1px;background:var(--border)"></div>
+      <div class="why-stat">
+        <span class="num">100%</span>
+        <span class="label">Genuine<br>Medicines</span>
+      </div>
+      <div style="width:100%;height:1px;background:var(--border)"></div>
+      <div class="why-stat">
+        <span class="num">∞</span>
+        <span class="label">Community<br>Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-tag reveal">Why Choose Us</div>
+    <h2 class="section-title reveal">More than a pharmacy —<br><em>a neighbour you trust.</em></h2>
+    <p class="section-sub reveal">We believe healthcare is personal. At Tanuj Pharmacy, every customer is greeted with warmth, every question is answered, and every medicine is dispensed with care.</p>
+    <div class="why-features">
+      <div class="why-feature">
+        <div class="icon-wrap">✅</div>
+        <div>
+          <h4>100% Genuine Products</h4>
+          <p>We source all medicines from authorised distributors, ensuring authenticity and safety for your family.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="icon-wrap">🧑‍⚕️</div>
+        <div>
+          <h4>Expert Pharmacist Guidance</h4>
+          <p>Our experienced pharmacist is always available to answer your health queries and recommend the right products.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="icon-wrap">🚀</div>
+        <div>
+          <h4>Fast & Friendly Service</h4>
+          <p>Quick billing, well-organised shelves, and a welcoming atmosphere make every visit pleasant and efficient.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="icon-wrap">💰</div>
+        <div>
+          <h4>Affordable Prices</h4>
+          <p>Competitive pricing on all products with special discounts on generic medicines to keep healthcare accessible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header">
+    <div>
+      <div class="section-tag reveal">What's In Store</div>
+      <h2 class="section-title reveal">Popular <em>Categories</em></h2>
+    </div>
+    <a href="tel:09600040093" class="btn-secondary reveal">Ask for availability →</a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card" style="--bg:#eaf7ee">
+      <div class="product-img" style="background:#eaf7ee">💊</div>
+      <div class="product-body">
+        <div class="product-cat">General Medicine</div>
+        <div class="product-name">Allopathic Drugs</div>
+        <p class="product-desc">Fever, pain relief, antibiotics, antacids, and everyday medicines from top pharma brands.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#f7f3e8">🌿</div>
+      <div class="product-body">
+        <div class="product-cat">Natural Wellness</div>
+        <div class="product-name">Ayurvedic Range</div>
+        <p class="product-desc">Herbal tonics, churans, and Ayurvedic formulations for holistic health management.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#f0eef8">💉</div>
+      <div class="product-body">
+        <div class="product-cat">First Aid</div>
+        <div class="product-name">Surgical Items</div>
+        <p class="product-desc">Needles, dressings, cotton, gloves, and emergency care supplies always in stock.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#fdf0ee">🍼</div>
+      <div class="product-body">
+        <div class="product-cat">Mother & Baby</div>
+        <div class="product-name">Infant Nutrition</div>
+        <p class="product-desc">Infant formulas, baby care essentials, and prenatal vitamins from trusted brands.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#eef5ff">🧴</div>
+      <div class="product-body">
+        <div class="product-cat">Personal Care</div>
+        <div class="product-name">Skin & Hair Care</div>
+        <p class="product-desc">Lotions, sunscreens, shampoos, and medicated skincare for daily wellness routines.</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" style="background:#edf8f2">📊</div>
+      <div class="product-body">
+        <div class="product-cat">Diagnostics</div>
+        <div class="product-name">Health Devices</div>
+        <p class="product-desc">Blood pressure monitors, glucometers, thermometers, and pulse oximeters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="reviews">
+  <div class="section-tag reveal">Customer Stories</div>
+  <h2 class="section-title reveal">What Our Customers <em style="font-style:italic;color:var(--gold-light)">Say</em></h2>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Wonderful pharmacy with genuine medicines and very helpful staff. The pharmacist always explains everything clearly. Highly recommended for the Avadi community!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🙋</div>
+        <div>
+          <div class="testi-name">Priya R.</div>
+          <div class="testi-sub">Kamaraj Nagar, Avadi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Best pharmacy near Avadi bus stand area. They always have medicines in stock and the prices are very reasonable. Service is quick and the owner is very friendly."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🙎</div>
+        <div>
+          <div class="testi-name">Manoj K.</div>
+          <div class="testi-sub">Govardanagiri Ext., Avadi</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I've been coming here for years. Genuine products, knowledgeable staff, and they even guide you on which generic medicine works just as well. Trust level is 100%."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👴</div>
+        <div>
+          <div class="testi-name">Suresh M.</div>
+          <div class="testi-sub">Avadi, Tamil Nadu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section style="background:var(--warm-white);padding:80px 5vw;" id="hours">
+  <div class="reveal">
+    <div class="section-tag">Opening Hours</div>
+    <h2 class="section-title">We're <em>Open</em> for You</h2>
+    <p class="section-sub">Visit us at Kamaraj Nagar, Avadi. We maintain regular hours to serve you and your family.</p>
+  </div>
+  <div class="open-badge reveal" style="margin-top:28px"><span class="dot"></span> Open Today</div>
+  <div class="hours-grid">
+    <div class="hours-card">
+      <div class="day">Monday – Friday</div>
+      <div class="time">8:00 AM – 9:30 PM</div>
+    </div>
+    <div class="hours-card today">
+      <div class="day">Wednesday</div>
+      <div class="time">8:00 AM – 9:30 PM</div>
+    </div>
+    <div class="hours-card">
+      <div class="day">Saturday</div>
+      <div class="time">8:00 AM – 9:00 PM</div>
+    </div>
+    <div class="hours-card">
+      <div class="day">Sunday</div>
+      <div class="time">9:00 AM – 2:00 PM</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-tag reveal">Get In Touch</div>
+    <h2 class="section-title reveal">Visit or <em>Call Us</em></h2>
+    <p class="section-sub reveal">We're always here to help. Drop by our store, give us a call, or send us a message.</p>
+    <div class="info-blocks">
+      <div class="info-block">
+        <div class="icon-wrap">📍</div>
+        <div>
+          <h4>Address</h4>
+          <p>No. 4/2, Road, Govardanagiri Extension,<br>Kamaraj Nagar, Avadi, Tamil Nadu 600071</p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="icon-wrap">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <p><a href="tel:09600040093">096000 40093</a></p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="icon-wrap">⏰</div>
+        <div>
+          <h4>Hours</h4>
+          <p>Mon – Fri: 8:00 AM – 9:30 PM<br>Sat: 8:00 AM – 9:00 PM<br>Sun: 9:00 AM – 2:00 PM</p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="icon-wrap">⭐</div>
+        <div>
+          <h4>Rating</h4>
+          <p>5.0 ★ on Google Reviews — <em style="color:var(--sage)">Highly Rated</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:8px;color:var(--charcoal)">Send a Message</h3>
+    <p style="font-size:.88rem;color:var(--muted);margin-bottom:4px">We'll get back to you soon.</p>
+    <div class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="fname" placeholder="Ravi Kumar" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="fphone" placeholder="98765 XXXXX" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="fsubject">
+          <option value="">Select a topic…</option>
+          <option>Medicine Availability</option>
+          <option>Prescription Query</option>
+          <option>Pricing / Discounts</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="fmessage" placeholder="Type your message here…"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send Message ✉</button>
+      <div class="form-success" id="formSuccess">✅ &nbsp;Thank you! We'll reach out to you shortly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <div class="map-container">
+    <div class="map-pin-card">
+      <div class="map-pin">📍</div>
+      <h3>Tanuj Pharmacy</h3>
+      <p>No. 4/2, Govardanagiri Extension,<br>Kamaraj Nagar, Avadi – 600071</p>
+      <a href="https://maps.google.com/?q=Tanuj+Pharmacy+Avadi+Tamil+Nadu" target="_blank" class="map-btn">
+        🗺 Open in Google Maps
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">✚ Tanuj Pharmacy</div>
+      <p>Your trusted neighbourhood pharmacy in Avadi, Tamil Nadu. Quality medicines, genuine care, and expert guidance — always.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Prescription Drugs</a></li>
+        <li><a href="#">OTC Medicines</a></li>
+        <li><a href="#">Baby Care</a></li>
+        <li><a href="#">Surgical Supplies</a></li>
+        <li><a href="#">Health Devices</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09600040093">096000 40093</a></li>
+        <li><a href="#">Avadi, Tamil Nadu</a></li>
+        <li><a href="#">600071</a></li>
+        <li><a href="https://maps.google.com/?q=Tanuj+Pharmacy+Avadi" target="_blank">Get Directions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Tanuj Pharmacy, Avadi. All rights reserved.</p>
+    <p>Kamaraj Nagar, Avadi, Tamil Nadu – 600071</p>
+  </div>
+</footer>
+
+<!-- FLOATING CALL -->
+<a href="tel:09600040093" class="float-call" title="Call Tanuj Pharmacy">📞</a>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .service-card, .why-feature, .info-block, .testi-card, .product-card, .hours-card, .trust-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          e.target.style.transition = 'opacity .65s ease, transform .65s ease';
+        }, (e.target.dataset.delay || 0) * 1);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  // Stagger children in grids
+  document.querySelectorAll('.services-grid .service-card, .products-grid .product-card, .testimonials-grid .testi-card, .hours-grid .hours-card, .why-features .why-feature, .info-blocks .info-block, .trust-bar .trust-item').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.09) + 's';
+  });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Form submit
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const subject = document.getElementById('fsubject').value;
+    const msg = document.getElementById('fmessage').value.trim();
+
+    if (!name || !phone) {
+      alert('Please enter your name and phone number.');
+      return;
+    }
+
+    // Simulate send
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '.7';
+
+    setTimeout(() => {
+      btn.style.display = 'none';
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'flex';
+      document.getElementById('fname').value = '';
+      document.getElementById('fphone').value = '';
+      document.getElementById('fsubject').value = '';
+      document.getElementById('fmessage').value = '';
+    }, 1400);
+  }
+
+  // Animate number counters (if in view)
+  function animateCount(el, target, suffix='') {
+    let start = 0, dur = 1600;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / dur, 1);
+      el.textContent = Math.floor(progress * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
